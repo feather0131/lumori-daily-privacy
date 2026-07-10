@@ -26,6 +26,29 @@
     margin: 0 auto;
     padding: 56px 24px 96px;
   }
+  .lang-switch {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .lang-switch button {
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-dim);
+    background: var(--card);
+    border: 1px solid rgba(201, 162, 75, 0.3);
+    border-radius: 999px;
+    padding: 6px 16px;
+    cursor: pointer;
+  }
+  .lang-switch button.active {
+    color: var(--bg);
+    background: var(--gold);
+    border-color: var(--gold);
+  }
   header {
     text-align: center;
     margin-bottom: 48px;
@@ -101,30 +124,48 @@
     color: var(--text-dim);
     font-size: 12.5px;
   }
+
+  /* 言語切り替え: body[data-lang]の値に応じて .ja / .en を出し分ける */
+  body[data-lang="ja"] .en { display: none; }
+  body[data-lang="en"] .ja { display: none; }
 </style>
 </head>
-<body>
+<body data-lang="ja">
   <div class="wrap">
+    <div class="lang-switch">
+      <button type="button" data-set-lang="ja">日本語</button>
+      <button type="button" data-set-lang="en">English</button>
+    </div>
+
     <header>
       <div class="icon">🌙</div>
-      <h1>プライバシーポリシー</h1>
+      <h1><span class="ja">プライバシーポリシー</span><span class="en">Privacy Policy</span></h1>
       <div class="app-name">Lumori Daily</div>
     </header>
-    <div class="updated">最終更新日: 2026年7月8日</div>
+    <div class="updated">
+      <span class="ja">最終更新日: 2026年7月8日</span>
+      <span class="en">Last updated: July 8, 2026</span>
+    </div>
 
     <section>
-      <h2>はじめに</h2>
-      <p>
+      <h2><span class="ja">はじめに</span><span class="en">Introduction</span></h2>
+      <p class="ja">
         「Lumori Daily」(以下「本アプリ」)は、個人開発者(以下「開発者」)が提供する、
         毎日の運勢占いアプリです。本ポリシーは、本アプリの利用にあたって取得する情報の
         内容と、その取り扱いについて説明するものです。
       </p>
+      <p class="en">
+        "Lumori Daily" (the "App") is a daily fortune-telling app provided by an individual
+        developer (the "Developer"). This policy explains what information is collected
+        when you use the App and how it is handled.
+      </p>
     </section>
 
     <section>
-      <h2>取得する情報</h2>
-      <p>本アプリは、以下の情報を取得する場合があります。</p>
-      <ul>
+      <h2><span class="ja">取得する情報</span><span class="en">Information We Collect</span></h2>
+      <p class="ja">本アプリは、以下の情報を取得する場合があります。</p>
+      <p class="en">The App may collect the following information.</p>
+      <ul class="ja">
         <li>
           <strong>位置情報</strong>:
           今日の運勢画面に表示する、天気に応じたメッセージ(例:「曇り空の下でも、心は晴れやかに」)を
@@ -154,82 +195,162 @@
           広告自体は表示されますが、パーソナライズされない広告となります。
         </li>
       </ul>
+      <ul class="en">
+        <li>
+          <strong>Location Data</strong>:
+          The App uses your device's approximate location to generate a weather-based
+          message shown on the Today's Fortune screen (e.g., "Even under cloudy skies,
+          your heart can stay clear"). Location is used solely to retrieve weather data
+          through Apple's WeatherKit and is never sent to or stored on the Developer's
+          servers.
+        </li>
+        <li>
+          <strong>Notification Permission Status</strong>:
+          If you enable the "Daily Reminder" feature, the App uses your notification
+          permission status to send a local notification at the time you specify. These
+          notifications are handled entirely on-device; no external server is involved.
+        </li>
+        <li>
+          <strong>App Usage Data</strong>:
+          The App records data such as your fortune results (star rating, message, lucky
+          color, etc.), earned titles, streak count, and mission completion status. All of
+          this is stored on-device using SwiftData, Apple's standard framework, and is
+          never transmitted to the Developer or any third party.
+        </li>
+        <li>
+          <strong>Advertising Identifiers &amp; Information</strong>:
+          The App uses Google's advertising service "Google AdMob." To display and measure
+          ads, your device's advertising identifier (IDFA), approximate device information,
+          and ad interaction data (impressions, clicks, etc.) may be sent to AdMob (Google).
+          In accordance with iOS App Tracking Transparency (ATT), the App will request
+          tracking permission (e.g., on first launch). If you decline, ads will still be
+          shown but will not be personalized.
+        </li>
+      </ul>
     </section>
 
     <section>
-      <h2>情報の利用目的</h2>
-      <p>取得した情報は、以下の目的でのみ利用します。</p>
-      <ul>
+      <h2><span class="ja">情報の利用目的</span><span class="en">Purpose of Use</span></h2>
+      <p class="ja">取得した情報は、以下の目的でのみ利用します。</p>
+      <p class="en">Collected information is used only for the following purposes.</p>
+      <ul class="ja">
         <li>今日の運勢・天気に応じたメッセージなど、本アプリの機能を提供するため</li>
         <li>過去の占い履歴・統計・称号・連続記録を表示するため</li>
         <li>設定した時刻にリマインド通知を送るため</li>
         <li>Google AdMobを通じて広告を表示し、リワード広告(視聴による特典付与)を提供するため</li>
       </ul>
+      <ul class="en">
+        <li>To provide App features such as today's fortune and weather-based messages</li>
+        <li>To display your fortune history, statistics, titles, and streak record</li>
+        <li>To send a reminder notification at your chosen time</li>
+        <li>To display ads via Google AdMob, including rewarded ads that grant in-app bonuses</li>
+      </ul>
     </section>
 
     <section>
-      <h2>広告(Google AdMob)について</h2>
-      <p>
+      <h2><span class="ja">広告(Google AdMob)について</span><span class="en">Advertising (Google AdMob)</span></h2>
+      <p class="ja">
         本アプリは、広告の表示のためにGoogle社が提供する「Google AdMob」を利用しています。
         AdMobは、広告の配信・最適化・計測のために、デバイスの広告識別子(IDFA)や
         おおよその位置情報、デバイス情報などを収集する場合があります。これらの情報の取り扱いは、
         本アプリの開発者ではなくGoogle社のプライバシーポリシーに従います。
       </p>
-      <p>
+      <p class="en">
+        The App uses Google's "Google AdMob" service to display ads. AdMob may collect your
+        device's advertising identifier (IDFA), approximate location, and device information
+        to deliver, optimize, and measure ads. Handling of this information is governed by
+        Google's privacy policy, not the App Developer's.
+      </p>
+      <p class="ja">
         詳細は
         <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google プライバシーポリシー</a>
         および
         <a href="https://www.google.com/about/company/user-consent-policy/" target="_blank" rel="noopener">Google広告のポリシー</a>
         をご確認ください。
       </p>
-      <p>
+      <p class="en">
+        For details, please see the
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>
+        and the
+        <a href="https://www.google.com/about/company/user-consent-policy/" target="_blank" rel="noopener">Google Ads Policy</a>.
+      </p>
+      <p class="ja">
         「広告を非表示にする」アプリ内課金をご購入いただいた場合、バナー広告およびリワード広告
         (「広告を見て応援する」「広告を見て招き星+10」)は表示されなくなります。
+      </p>
+      <p class="en">
+        If you purchase the "Remove Ads" in-app purchase, banner ads and rewarded ads
+        ("Watch an ad to support us" / "Watch an ad for +10 stars") will no longer be shown.
       </p>
     </section>
 
     <section>
-      <h2>第三者への提供</h2>
-      <p>
+      <h2><span class="ja">第三者への提供</span><span class="en">Disclosure to Third Parties</span></h2>
+      <p class="ja">
         本アプリは、広告(Google AdMob)を通じて、上記の広告関連識別子・デバイス情報が
         Google社に送信される場合があります。それ以外の目的で、取得した情報を第三者に
         提供・販売することはありません。
       </p>
-      <p>
+      <p class="en">
+        Through advertising (Google AdMob), the advertising identifiers and device
+        information described above may be sent to Google. Aside from this, the App does
+        not provide or sell collected information to any third party.
+      </p>
+      <p class="ja">
         位置情報に基づく天気情報の取得には、Apple社が提供するWeatherKitを利用しています。
         この際の情報の取り扱いについては、Apple社のプライバシーポリシーが適用されます。
+      </p>
+      <p class="en">
+        The App uses Apple's WeatherKit to retrieve weather information based on location.
+        Handling of this information is governed by Apple's privacy policy.
       </p>
     </section>
 
     <section>
-      <h2>データの保存場所と削除</h2>
-      <p>
+      <h2><span class="ja">データの保存場所と削除</span><span class="en">Data Storage &amp; Deletion</span></h2>
+      <p class="ja">
         占い履歴・称号・設定などのデータは、すべてお使いの端末内にのみ保存されます。
         開発者が運用するサーバーにアップロードされることはありません。本アプリをアンインストール
         すると、これらのデータは端末から完全に削除されます。
       </p>
+      <p class="en">
+        Your fortune history, titles, settings, and other data are stored only on your
+        device and are never uploaded to any server operated by the Developer. Uninstalling
+        the App permanently deletes this data from your device.
+      </p>
     </section>
 
     <section>
-      <h2>お子様のプライバシー</h2>
-      <p>
+      <h2><span class="ja">お子様のプライバシー</span><span class="en">Children's Privacy</span></h2>
+      <p class="ja">
         本アプリは特定の年齢層を対象としたものではありませんが、
         13歳未満のお子様から意図的に個人情報を収集することはありません。
       </p>
-    </section>
-
-    <section>
-      <h2>本ポリシーの変更</h2>
-      <p>
-        本ポリシーの内容は、法令の変更や本アプリの機能追加に伴い、予告なく変更される場合が
-        あります。重要な変更がある場合は、本ページ上で通知します。
+      <p class="en">
+        The App is not directed at any specific age group, but it does not knowingly
+        collect personal information from children under the age of 13.
       </p>
     </section>
 
     <section>
-      <h2>お問い合わせ</h2>
-      <p>
+      <h2><span class="ja">本ポリシーの変更</span><span class="en">Changes to This Policy</span></h2>
+      <p class="ja">
+        本ポリシーの内容は、法令の変更や本アプリの機能追加に伴い、予告なく変更される場合が
+        あります。重要な変更がある場合は、本ページ上で通知します。
+      </p>
+      <p class="en">
+        This policy may be changed without notice due to changes in law or the addition of
+        new App features. Any significant changes will be announced on this page.
+      </p>
+    </section>
+
+    <section>
+      <h2><span class="ja">お問い合わせ</span><span class="en">Contact</span></h2>
+      <p class="ja">
         本ポリシーに関するご質問・ご不明点がございましたら、以下の連絡先までお問い合わせください。
+      </p>
+      <p class="en">
+        If you have any questions about this policy, please contact us at the address below.
       </p>
       <p><a href="mailto:feathecrea@outlook.com">feathecrea@outlook.com</a></p>
     </section>
@@ -238,5 +359,36 @@
       Lumori Daily — © 2026
     </footer>
   </div>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = "lumoriPrivacyLang";
+      var buttons = document.querySelectorAll("[data-set-lang]");
+
+      function applyLang(lang) {
+        document.body.setAttribute("data-lang", lang);
+        document.documentElement.setAttribute("lang", lang);
+        document.title = lang === "en"
+          ? "Privacy Policy | Lumori Daily"
+          : "プライバシーポリシー | Lumori Daily";
+        buttons.forEach(function (btn) {
+          btn.classList.toggle("active", btn.getAttribute("data-set-lang") === lang);
+        });
+        try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+      }
+
+      var saved = null;
+      try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+      var initial = saved || (navigator.language && navigator.language.toLowerCase().indexOf("ja") === 0 ? "ja" : "en");
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          applyLang(btn.getAttribute("data-set-lang"));
+        });
+      });
+
+      applyLang(initial);
+    })();
+  </script>
 </body>
 </html>
